@@ -1,6 +1,8 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-var lowerCase = [
+
+// Fill arrays with available characters - lowercase, uppercase, special characters, numbers
+var lowerCaseArray = [
   'a', 
   'b', 
   'c', 
@@ -29,7 +31,7 @@ var lowerCase = [
   'z'
 ];
 
-var upperCase = [
+var upperCaseArray = [
   'A', 
   'B', 
   'C', 
@@ -58,7 +60,7 @@ var upperCase = [
   'Z'
 ];
 
-var specialChar = [
+var specialCharArray = [
   '!',
   '"',
   '#',
@@ -92,7 +94,7 @@ var specialChar = [
   '~'
 ];
 
-var numberChar = [
+var numberCharArray = [
   '0',
   '1',
   '2',
@@ -105,15 +107,27 @@ var numberChar = [
   '9',
 ];
 
+// Establish variables to pull a random element from each array
+// var randomLowerCase = lowerCaseArray[Math.floor(Math.random() * lowerCaseArray.length)];
+// var randomUpperCase = upperCaseArray[Math.floor(Math.random() * upperCaseArray.length)];
+// var randomSpecialChar = specialCharArray[Math.floor(Math.random() * specialCharArray.length)];
+// var randomNumberChar = numberCharArray[Math.floor(Math.random() * numberCharArray.length)];
 
-console.log(lowerCase.length);
-console.log(lowerCase);
-console.log(upperCase.length);
-console.log(upperCase);
-console.log(specialChar.length);
-console.log(specialChar);
-console.log(numberChar.length);
-console.log(numberChar);
+var passwordLength = 12;
+var passwordArray = [];
+
+function passwordGen() {
+  for (i=0; i < passwordLength; i++) {
+    var randomLowerCase = lowerCaseArray[Math.floor(Math.random() * lowerCaseArray.length)];
+    console.log(randomLowerCase);
+    passwordArray.push(randomLowerCase);
+  };
+};
+
+passwordGen();
+var passwordString = passwordArray.join('');
+console.log(passwordString);
+
 
 // Write password to the #password input
 function writePassword() {
