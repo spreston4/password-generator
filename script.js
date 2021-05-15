@@ -107,26 +107,52 @@ var numberCharArray = [
   '9',
 ];
 
-// Establish variables to pull a random element from each array
+// Establish variables to pull a random element from each array - scope needs to be in function so variable refreshes every loop
 // var randomLowerCase = lowerCaseArray[Math.floor(Math.random() * lowerCaseArray.length)];
 // var randomUpperCase = upperCaseArray[Math.floor(Math.random() * upperCaseArray.length)];
 // var randomSpecialChar = specialCharArray[Math.floor(Math.random() * specialCharArray.length)];
 // var randomNumberChar = numberCharArray[Math.floor(Math.random() * numberCharArray.length)];
+// passwordArray.push(arrayName)
 
-var passwordLength = 12;
-var passwordArray = [];
+var passwordLength = 8;         // Set length of password to generate
+var passwordArray = [];         // Empty array to stor password
+var wantUpperCase = true;       // Does user want uppercase characters in password?
+var wantLowerCase = false;      // Does user want lowercase characters in password?
+var wantSpecialChar = true;     // Does user want special characters in password?
+var wantNumberChar = true;      // Does user want number characters in password?
 
 function passwordGen() {
-  for (i=0; i < passwordLength; i++) {
-    var randomLowerCase = lowerCaseArray[Math.floor(Math.random() * lowerCaseArray.length)];
-    console.log(randomLowerCase);
-    passwordArray.push(randomLowerCase);
+  for (i=0; i < passwordLength; i = i + 1) {
+
+    if (i < passwordLength && wantUpperCase === true) {
+      var randomUpperCase = upperCaseArray[Math.floor(Math.random() * upperCaseArray.length)];
+      passwordArray.push(randomUpperCase);
+      i = i + 1;
+    };
+
+    if (i < passwordLength && wantLowerCase === true) {
+      var randomLowerCase = lowerCaseArray[Math.floor(Math.random() * lowerCaseArray.length)];
+      passwordArray.push(randomLowerCase);
+      i = i + 1;
+    };
+
+    if (i < passwordLength && wantSpecialChar === true) {
+      var randomSpecialChar = specialCharArray[Math.floor(Math.random() * specialCharArray.length)];
+      passwordArray.push(randomSpecialChar);
+      i = i + 1;
+    };
+
+    if (i < passwordLength && wantNumberChar === true) {
+      var randomNumberChar = numberCharArray[Math.floor(Math.random() * numberCharArray.length)];
+      passwordArray.push(randomNumberChar);
+    };
   };
 };
 
 passwordGen();
 var passwordString = passwordArray.join('');
-console.log(passwordString);
+console.log("Your new password is: " + passwordString);
+console.log(passwordString.length);
 
 
 // Write password to the #password input
