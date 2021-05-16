@@ -107,18 +107,7 @@ var numberCharArray = [
   '9',
 ];
 
-// Establish variables to pull a random element from each array - scope needs to be in function so variable refreshes every loop
-// var randomLowerCase = lowerCaseArray[Math.floor(Math.random() * lowerCaseArray.length)];
-// var randomUpperCase = upperCaseArray[Math.floor(Math.random() * upperCaseArray.length)];
-// var randomSpecialChar = specialCharArray[Math.floor(Math.random() * specialCharArray.length)];
-// var randomNumberChar = numberCharArray[Math.floor(Math.random() * numberCharArray.length)];
-// passwordArray.push(arrayName)
-
-// var wantUpperCase = true;       // Does user want uppercase characters in password?
-// var wantLowerCase = false;      // Does user want lowercase characters in password?
-// var wantSpecialChar = true;     // Does user want special characters in password?
-// var wantNumberChar = true;      // Does user want number characters in password?
-
+// Generate the password
 function generatePassword() {
   // Declare empty 'passwordArray'for password storage
   var passwordArray = [];
