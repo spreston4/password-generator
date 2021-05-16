@@ -109,8 +109,9 @@ var numberCharArray = [
 
 // Generate the password
 function generatePassword() {
-  // Declare empty 'passwordArray'for password storage
+  // Declare empty 'passwordArray'for password storage & 'allCharArray' for combining character arrays
   var passwordArray = [];
+  var allCharArray = [];
 
   // Ask user for 'passwordLength'
   var passwordLengthString = prompt('How long do you want your password?', '15');
@@ -145,33 +146,87 @@ function generatePassword() {
     generatePassword();
   };
 
+  // Establish variable 'i' to ensure correct 'passwordLength
+  var i = 0;
 
-  for (i=0; i < passwordLength; i = i + 1) {
-
-    if (i < passwordLength && wantUpperCase === true) {
-      var randomUpperCase = upperCaseArray[Math.floor(Math.random() * upperCaseArray.length)];
-      passwordArray.push(randomUpperCase);
-      i = i + 1;
-    };
-
-    if (i < passwordLength && wantLowerCase === true) {
-      var randomLowerCase = lowerCaseArray[Math.floor(Math.random() * lowerCaseArray.length)];
-      passwordArray.push(randomLowerCase);
-      i = i + 1;
-    };
-
-    if (i < passwordLength && wantSpecialChar === true) {
-      var randomSpecialChar = specialCharArray[Math.floor(Math.random() * specialCharArray.length)];
-      passwordArray.push(randomSpecialChar);
-      i = i + 1;
-    };
-
-    if (i < passwordLength && wantNumberChar === true) {
-      var randomNumberChar = numberCharArray[Math.floor(Math.random() * numberCharArray.length)];
-      passwordArray.push(randomNumberChar);
-    };
-    // console.log(passwordArray);   // Display for testing
+  // Combine selected character types into one 'allCharArray' - add one of each selected character type to the 'passwordArray'
+  // Combine 'upperCaseArray'
+  if (wantUpperCase) {
+    // Select random element from 'upperCaseArray'
+    var randomUpperCase = upperCaseArray[Math.floor(Math.random() * upperCaseArray.length)];
+    // Place selected element into 'passwordArray'
+    passwordArray.push(randomUpperCase);
+    // Keep track of length of password
+    i = i + 1; 
+    // Add current array to 'allCharArray'
+    allCharArray = allCharArray.concat(upperCaseArray);
+    console.log(upperCaseArray.length, 'Uppercase: ' + upperCaseArray); // For testing
   };
+
+  // Combine 'lowerCaseArray'
+  if (wantLowerCase) {
+    var randomLowerCase = lowerCaseArray[Math.floor(Math.random() * lowerCaseArray.length)];
+    passwordArray.push(randomLowerCase);
+    i = i + 1;
+    allCharArray = allCharArray.concat(lowerCaseArray);
+    console.log(lowerCaseArray.length, 'Lowercase: ' + lowerCaseArray); // For testing
+  };
+
+  // Combine 'specialCharArray'
+  if (wantSpecialChar) {
+    var randomSpecialChar = specialCharArray[Math.floor(Math.random() * specialCharArray.length)];
+    passwordArray.push(randomSpecialChar);
+    i = i + 1;
+    allCharArray = allCharArray.concat(specialCharArray);
+    console.log(specialCharArray.length, 'Special char: ' + specialCharArray); // For testing
+  };
+
+  // Combine 'numberCharArray'
+  if (wantNumberChar) {
+    var randomNumberChar = numberCharArray[Math.floor(Math.random() * numberCharArray.length)];
+    passwordArray.push(randomNumberChar);
+    i = i + 1;
+    allCharArray = allCharArray.concat(numberCharArray);
+    console.log(numberCharArray.length, 'Numbers : ' +numberCharArray); // For testing
+  };
+  
+  console.log(allCharArray.length, 'All Char Array: ' + allCharArray); // For testing
+
+  // Fill the rest of 'passwordArray' with random elements from 'allCharArray'
+  for (i = i; i < passwordLength; i++) {
+    var randomChar = allCharArray[Math.floor(Math.random() * allCharArray.length)];
+    passwordArray.push(randomChar);
+  };
+
+// ------------------------------------------------------------------------------------------------- //
+// Original Logic - error with the way it counted i - excluding numbers would throw off count
+  // for (i=0; i < passwordLength; i = i + 1) {
+
+  //   if (i < passwordLength && wantUpperCase === true) {
+  //     var randomUpperCase = upperCaseArray[Math.floor(Math.random() * upperCaseArray.length)];
+  //     passwordArray.push(randomUpperCase);
+  //     i = i + 1;
+  //   };
+
+  //   if (i < passwordLength && wantLowerCase === true) {
+  //     var randomLowerCase = lowerCaseArray[Math.floor(Math.random() * lowerCaseArray.length)];
+  //     passwordArray.push(randomLowerCase);
+  //     i = i + 1;
+  //   };
+
+  //   if (i < passwordLength && wantSpecialChar === true) {
+  //     var randomSpecialChar = specialCharArray[Math.floor(Math.random() * specialCharArray.length)];
+  //     passwordArray.push(randomSpecialChar);
+  //     i = i + 1;
+  //   };
+
+  //   if (i < passwordLength && wantNumberChar === true) {
+  //     var randomNumberChar = numberCharArray[Math.floor(Math.random() * numberCharArray.length)];
+  //     passwordArray.push(randomNumberChar);
+  //   };
+  //   // console.log(passwordArray);   // Display for testing
+  // };
+  // ----------------------------------------------------------------------------------------------- //
 
   // Convert 'passwordArray' to string
   var password = passwordArray.join('');
